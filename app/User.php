@@ -10,6 +10,16 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

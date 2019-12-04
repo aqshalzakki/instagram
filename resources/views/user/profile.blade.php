@@ -7,17 +7,18 @@
             <img src="{{ asset('images/profile.jpg') }}" class="rounded-circle">
         </div>
         <div class="col-9 pt-5">
-            <div class="">
+            <div class="d-flex justify-content-between align-items-baseline">
                 <h1>{{ $user->username }}</h1>
+                <a href="">Add New Post</a>
             </div>
             <div class="d-flex">
                 <div class="pr-5"><strong>1</strong> posts</div>
                 <div class="pr-5"><strong>141</strong> followers</div>
                 <div class="pr-5"><strong>139</strong> following</div>
             </div>
-            <div class="pt-4 font-weight-bold">yourdisturber</div>
-            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque reiciendis vel ratione laborum commodi aliquid nisi, iusto voluptates ad, deserunt consequatur.</div>
-            <div><a href="https://github.com/aqshalzakki">My github account</a></div>
+            <div class="pt-4 font-weight-bold">{{ $user->profile->title }}</div>
+            <div>{{ $user->profile->description }}</div>
+            <div><a href="{{ $user->profile->url }}" target="_blank"> {{ $user->profile->url }} </a></div>
         </div>
     </div>
     <div class="row pt-5">
