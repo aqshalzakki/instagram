@@ -9,10 +9,10 @@ class ProfilesController extends Controller
 {
     public function show($username)
     {
-    	$user = User::with('profile')
+    	$user = User::with(['profile', 'posts'])
     				->whereUsername($username)
     				->firstOrFail();
 
-    	return view('user.profile', ['user'	=> $user]);
+    	return view('profiles.index', ['user' => $user]);
     }
 }
