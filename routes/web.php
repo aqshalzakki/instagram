@@ -17,7 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/profile/{user}', 'ProfilesController@show')->name('profile.show');
+// Profile Routes
+    Route::get('/profile/{user}/edit/', 'ProfilesController@edit')->name('profile.edit')->middleware('auth');; 
+    Route::get('/profile/{user}', 'ProfilesController@show')->name('profile.show');
+// ----------
 
-Route::get('/post/create', 'PostsController@create')->name('post.create')->middleware('auth');
-Route::post('/post', 'PostsController@store')->name('post.store')->middleware('auth');
+// Post Routes 
+    Route::get('/post/{post}', 'PostsController@show')->name('post.show');
+    Route::get('/post/create', 'PostsController@create')->name('post.create')->middleware('auth');
+    Route::post('/post', 'PostsController@store')->name('post.store')->middleware('auth');
+// -----------

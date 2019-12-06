@@ -18,10 +18,13 @@
             <img src="{{ asset('images/profile/'.$user->image) }}" class="rounded-circle" style="width: 80%;">
         </div>
         <div class="col-9 pt-5">
+            
             <div class="d-flex justify-content-between align-items-baseline">
                 <h1>{{ $user->username }}</h1>
                 <a href="{{ route('post.create') }}">Add New Post</a>
             </div>
+            <a href="{{ route('profile.edit', $user->username) }}">Edit Profile</a>
+            
             <div class="d-flex">
                 <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
                 <div class="pr-5"><strong>141</strong> followers</div>
@@ -35,7 +38,9 @@
     <div class="row pt-5">
         @forelse ($user->posts as $post)    
             <div class="col-4 pb-4">
-                <img src="/storage/{{ $post->image }}" class="w-100">
+                <a href="{{ route('post.show', $post->id) }}">
+                    <img src="/storage/{{ $post->image }}" class="w-100">
+                </a>
             </div>    
             @empty
             <div class="col-12">

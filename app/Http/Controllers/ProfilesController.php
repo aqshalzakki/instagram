@@ -14,5 +14,17 @@ class ProfilesController extends Controller
     				->firstOrFail();
 
     	return view('profiles.index', ['user' => $user]);
-    }
+	}
+
+	public function edit($user)
+	{
+		$user = User::with('profile')
+					->whereUsername($user)
+					->firstOrFail();
+
+		// \dd($user);
+		return view('profiles.edit', [
+			'user'	=> $user,
+		]);
+	}
 }
