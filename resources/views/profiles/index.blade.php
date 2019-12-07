@@ -4,27 +4,32 @@
 <div class="container">
     
     @if(session()->has('message'))
-        <div class="row">
-            <div class="col-12">
-                <div class="alert alert-success">
-                    {{ session('message') }}
-                </div>
-            </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
 
     <div class="row">
         <div class="col-3 p-5">
-            <img src="{{ asset('images/profile/'.$user->image) }}" class="rounded-circle" style="width: 80%;">
+            <img src="/storage/{{ $user->profile->image }}" class="rounded-circle w-100">
         </div>
         <div class="col-9 pt-5">
             
             <div class="d-flex justify-content-between align-items-baseline">
                 <h1>{{ $user->username }}</h1>
-                <a href="{{ route('post.create') }}">Add New Post</a>
+
+                @can ('update', $user->profile)
+                    <a href="{{ route('post.create') }}">Add New Post</a>
+                @endcan
+                
             </div>
-            <a href="{{ route('profile.edit', $user->username) }}">Edit Profile</a>
-            
+                @can ('update', $user->profile)
+                    <a href="{{ route('profile.edit', $user->username) }}">Edit Profile</a>
+                @endcan
+                
             <div class="d-flex">
                 <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
                 <div class="pr-5"><strong>141</strong> followers</div>

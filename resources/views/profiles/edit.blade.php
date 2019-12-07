@@ -7,8 +7,9 @@
             <h1>Edit Profile</h1>
         </div>
     </div>
-    <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('profile.update', $user->id) }}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PATCH')
         <div class="row">
             <div class="col-8 offset-2">
                 
@@ -16,12 +17,12 @@
                     <label for="title" class="col-md-4 col-form-label"><h5>Username</h5></label>
                     
                     <input
-                    id="title" 
+                    id="username" 
                     type="text" 
-                    class="form-control @error('title') is-invalid @enderror" 
-                    name="title" 
+                    class="form-control @error('username') is-invalid @enderror" 
+                    name="username" 
                     value="{{ $user->username }}">
-                    @error('title')
+                    @error('username')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -42,7 +43,7 @@
                     type="text" 
                     class="form-control @error('title') is-invalid @enderror" 
                     name="title" 
-                    value="{{ $user->title }}">
+                    value="{{ $user->profile->title }}">
                     @error('title')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -59,12 +60,11 @@
                 <div class="form-group row">
                     <label for="description" class="col-md-4 col-form-label"><h5>Description</h5></label>
                     
-                    <input
-                    id="description" 
-                    type="text" 
+                    <textarea
+                    id="description"
                     class="form-control @error('description') is-invalid @enderror" 
                     name="description" 
-                    value="{{ $user->description }}">
+                    value="{{ old('description') }}">{{ $user->profile->description }}</textarea>
                     @error('description')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -86,7 +86,7 @@
                     type="text" 
                     class="form-control @error('url') is-invalid @enderror" 
                     name="url" 
-                    value="{{ $user->url }}">
+                    value="{{ $user->profile->url }}">
                     @error('url')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -98,10 +98,10 @@
             </div>
         </div>
 
-        {{-- <div class="row">
+        <div class="row">
             
             <div class="col-8 offset-2">
-                <label for="caption" class="col-md-4 col-form-label"><h5>Post image</h5></label>
+                <label for="caption" class="col-md-4 col-form-label"><h5>Profile image</h5></label>
                 <input type="file" class="form-control-file" id="image" name="image">
             
                 @error('image')
@@ -109,7 +109,7 @@
                 @enderror
             </div>
 
-        </div> --}}
+        </div>
         
         <div class="row mt-4">
             <div class="col-8 offset-2">
@@ -118,7 +118,7 @@
         </div>
         <div class="row mt-5">
             <div class="col-8 offset-2">
-                <a href="{{ route('profile.show', [auth()->user()->username]) }}"> Back to profile </a>
+                <a href="{{ route('profile.show', auth()->user()->username) }}"> Back to profile </a>
             </div>
         </div>
     </form>
