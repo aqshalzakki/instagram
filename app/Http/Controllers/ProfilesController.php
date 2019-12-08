@@ -42,18 +42,26 @@ class ProfilesController extends Controller
 			'title'			=> 'max:35',
 			'description' 	=> '',
 			'url'			=> 'url',
-			'image'			=> '',
+			'image'			=> 'image',
 		]);
 
+		// if user upload an image
 		if ($request->has('image'))
 		{
+			/**
+	         * store an image to storage directory
+	         *
+	         * @param  folder name, driver name
+	         * @return file path from the given folder name, like so : profiles/filename.jpg
+	         */
+			$imagePath = $request->image->store('profiles', 'public');	
 			
-			$imagePath = $request->image->store('profiles', 'public');
-			// intervention the image 
+			// intervention/resize the image 
 			$image = Image::make(\public_path("storage/$imagePath"))->fit(1000, 1000);
-			
+			$image->save();
+
 			$data = \array_merge($data, [
-				'image' => $image
+				'image' => $imagePath
 			]);
 		}
 
@@ -61,6 +69,6 @@ class ProfilesController extends Controller
 		$user->update($username);
 		$user->profile->update($data);
 		
-		return \redirect()->route('profile.show', $user->username)->withMessage('Profile has been updated!');
+		return \redirect()->route('profile.show', $request->input('username'))->withMessage('Profile has been updated!');
 	}
 }

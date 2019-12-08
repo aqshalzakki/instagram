@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
-    
     @if(session()->has('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('message') }}
@@ -32,11 +32,11 @@
                 
             <div class="d-flex">
                 <div class="pr-5"><strong>{{ $user->posts->count() }}</strong> posts</div>
-                <div class="pr-5"><strong>141</strong> followers</div>
-                <div class="pr-5"><strong>139</strong> following</div>
+                <div class="pr-5"><strong>29</strong> followers</div>
+                <div class="pr-5"><strong>13</strong> following</div>
             </div>
             <div class="pt-4 font-weight-bold">{{ $user->profile->title ?? '' }}</div>
-            <div>{{ $user->profile->description ?? '' }}</div>
+            <div>{!! nl2br($user->profile->description) ?? '' !!}</div>
             <div><a href="{{ $user->profile->url ?? '' }}" target="_blank"> {{ $user->profile->url ?? '' }} </a></div>
         </div>
     </div>
