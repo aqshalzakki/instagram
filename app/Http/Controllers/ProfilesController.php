@@ -60,6 +60,7 @@ class ProfilesController extends Controller
 			$image = Image::make(\public_path("storage/$imagePath"))->fit(1000, 1000);
 			$image->save();
 
+			// merge the data's array 
 			$data = \array_merge($data, [
 				'image' => $imagePath
 			]);
