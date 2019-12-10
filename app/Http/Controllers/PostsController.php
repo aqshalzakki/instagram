@@ -9,13 +9,19 @@ use Intervention\Image\Facades\Image;
 class PostsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the posts.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        // grab the users id 
+        $usersId = auth()->user()->following()->pluck('profiles.user_id');
+
+        // grab the posts
+        $posts = Post::with(['user'])->whereIn('user_id', $usersId)->latest()->paginate(5);
+
+        return view('posts.index', compact('posts'));
     }
 
     /**

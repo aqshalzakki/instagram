@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 // Profile Routes
@@ -24,6 +20,7 @@ Auth::routes();
 // ----------
 
 // Post Routes 
+  	Route::get('/', 'PostsController@index');
     Route::get('/post/create', 'PostsController@create')->name('post.create')->middleware('auth');
     Route::post('/post', 'PostsController@store')->name('post.store')->middleware('auth');
     Route::get('/post/{post}', 'PostsController@show')->name('post.show');
