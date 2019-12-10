@@ -14,7 +14,15 @@ class ProfilesController extends Controller
     				->whereUsername($username)
     				->firstOrFail();
 
-    	return view('profiles.index', ['user' => $user]);
+    	$currentUrl = explode('/', request()->path())[1];
+
+    	$follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+
+    	return view('profiles.index', [
+    		'user' 		 => $user,
+    		'follows'	 => $follows,
+    		'currentUrl' => $currentUrl
+    	]);
 	}
 
 	public function edit($user)

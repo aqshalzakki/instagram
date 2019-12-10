@@ -103,8 +103,11 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $this->authorize('delete', $post);
+
+        Post::destroy($post->id);
+        return redirect()->route('profile.show', auth()->user()->username)->withMessage('Post has been deleted!');
     }
 }

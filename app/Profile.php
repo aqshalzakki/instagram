@@ -23,4 +23,15 @@ class Profile extends Model
     {
     	return $this->belongsTo(User::class);
     }
+
+    /**
+     * hold some followers 
+     *
+     * @return followers
+     * @author aqshalzakki
+     **/
+    public function followers()
+    {
+    	return $this->belongsToMany(User::class);
+    }
 }

@@ -27,4 +27,12 @@ Auth::routes();
     Route::get('/post/create', 'PostsController@create')->name('post.create')->middleware('auth');
     Route::post('/post', 'PostsController@store')->name('post.store')->middleware('auth');
     Route::get('/post/{post}', 'PostsController@show')->name('post.show');
+
+    Route::delete('/post/{post}', 'PostsController@destroy')->name('post.destroy');
 // -----------
+
+// Vue in Actions 
+
+    Route::post('/follow/{user}', 'FollowsController@store')->middleware('auth');
+
+// --------------

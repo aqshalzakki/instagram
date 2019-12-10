@@ -21,6 +21,17 @@ class User extends Authenticatable
     }
 
     /**
+     * Hold a bunch of following user's profile
+     *
+     * @return following
+     * @author aqshalzakki
+     **/
+    public function following()
+    {
+        return $this->belongsToMany(Profile::class);
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

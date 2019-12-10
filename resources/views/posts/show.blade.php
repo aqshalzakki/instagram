@@ -21,6 +21,15 @@
                             <a href="#" class="pl-3">
                                 Follow
                             </a>
+                                @can('delete', $post)
+                                    <form style="display: inline;" method="post" action="{{ route('post.destroy', $post->id) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <button onclick="return confirm('Are you sure you want to delete this post?')" href="#" class="btn btn-link pl-3 text-danger">
+                                            Delete post?
+                                        </button>
+                                    </form>
+                                @endcan
                         </div>
                     </div>
                 </div>
@@ -33,7 +42,7 @@
                             {{ $post->user->username }}
                         </a>
                     </span>
-                    {{ $post->caption }}
+                    {!! nl2br($post->caption) !!}
                 </p>
             </div>
         </div>
