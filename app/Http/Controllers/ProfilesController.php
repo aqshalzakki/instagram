@@ -10,7 +10,7 @@ class ProfilesController extends Controller
 {
     public function show($username)
     {
-    	$user = User::with(['profile', 'posts'])
+    	$user = User::with(['profile', 'posts:id,user_id,image'])
     				->whereUsername($username)
     				->firstOrFail();
 
