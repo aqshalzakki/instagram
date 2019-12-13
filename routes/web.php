@@ -13,19 +13,35 @@
 
 Auth::routes();
 
-// Profile Routes
-    Route::get('/profile/{user}/edit/', 'ProfilesController@edit')->name('profile.edit')->middleware('auth');; 
-    Route::get('/profile/{user}', 'ProfilesController@show')->name('profile.show');
-    Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
-// ----------
+    Route::prefix('profile')->group(function(){
+
+        Route::get('{user}/edit/', 'ProfilesController@edit')
+               ->name('profile.edit')
+               ->middleware('auth');
+                
+        Route::get('{user}', 'ProfilesController@show')
+               ->name('profile.show');
+        
+        Route::patch('{user}', 'ProfilesController@update')
+               ->name('profile.update')
+               ->middleware('auth');
+
+    });
 
 // Post Routes 
-  	Route::get('/', 'PostsController@index');
-    Route::get('/post/create', 'PostsController@create')->name('post.create')->middleware('auth');
-    Route::post('/post', 'PostsController@store')->name('post.store')->middleware('auth');
-    Route::get('/post/{post}', 'PostsController@show')->name('post.show');
 
-    Route::delete('/post/{post}', 'PostsController@destroy')->name('post.destroy');
+    Route::get('/', 'PostsController@index')->middleware('auth');
+    
+    Route::prefix('post')->group(function(){
+
+        Route::get('create', 'PostsController@create')->name('post.create')->middleware('auth');
+        Route::post('', 'PostsController@store')->name('post.store')->middleware('auth');
+        Route::get('{post}', 'PostsController@show')->name('post.show');
+    
+        Route::delete('{post}', 'PostsController@destroy')->name('post.destroy');
+    
+    });
+
 // -----------
 
 // Vue in Actions 
