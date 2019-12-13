@@ -15,8 +15,10 @@ class PostsController extends Controller
      */
     public function index()
     {
+        $currentUser = auth()->user();
+
         // grab the users id 
-        $usersId = auth()->user()->following()->pluck('profiles.user_id');
+        $usersId = $currentUser->following()->pluck('profiles.user_id')->prepend($currentUser->id);
 
         // grab the posts
         $posts = Post::with(['user'])->whereIn('user_id', $usersId)->latest()->paginate(5);

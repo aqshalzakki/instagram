@@ -13,6 +13,14 @@
 
 Auth::routes();
 
+// Welcome View 
+
+    Route::get('/', function(){ return view('welcome'); });
+
+// -----------
+
+// Profile Routes 
+
     Route::prefix('profile')->group(function(){
 
         Route::get('{user}/edit/', 'ProfilesController@edit')
@@ -28,10 +36,12 @@ Auth::routes();
 
     });
 
+// --------------
+
 // Post Routes 
 
-    Route::get('/', 'PostsController@index')->middleware('auth');
     
+    Route::get('/feeds', 'PostsController@index')->name('post.index');
     Route::prefix('post')->group(function(){
 
         Route::get('create', 'PostsController@create')->name('post.create')->middleware('auth');
