@@ -20,19 +20,19 @@ class ProfilesController extends Controller
     	$follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
 
     	$postsCount     = Cache::remember("posts.count.$user->id", 
-    		 			  now()->addSeconds(30), 
+    		 			  now()->addHours(1), 
     		 			  function() use($user){
     		 			  	 return $user->posts->count();
 				    	  });
 
     	$followersCount = Cache::remember("followers.count.$user->id", 
-    		 			  now()->addSeconds(30), 
+    		 			  now()->addHours(1), 
     		 			  function() use($user){
     		 			  	 return $user->profile->followers->count();
 				    	  }); 
 
     	$followingCount = Cache::remember("following.count.$user->id", 
-    		 			  now()->addSeconds(30), 
+    		 			  now()->addHours(1), 
     		 			  function() use($user){
     		 			  	 return $user->following->count();
 				    	  });

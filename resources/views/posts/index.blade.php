@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	@foreach($posts as $post)
+	@forelse($posts as $post)
 	    <div class="row">
 	        <div class="col-6 offset-3">
 	            <a href="{{ route('post.show', $post->id) }}">
@@ -25,7 +25,12 @@
 	            </div>
 	        </div>
 	    </div>
-	@endforeach
+
+	    @empty
+
+	    	There is no posts available
+	    	
+	@endforelse
 
 	<div class="row">
 	    	<div class="col-12 d-flex justify-content-center">

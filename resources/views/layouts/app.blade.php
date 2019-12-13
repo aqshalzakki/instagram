@@ -56,14 +56,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <a class="dropdown-item {{ urlActive('profile') }}" href="{{ route('profile.show', Auth::user()->username) }}">Profile</a>
+                                    <a class="dropdown-item {{ urlActive('feeds') }}" href="{{ route('post.index') }}">Feeds</a>
+                                    <form method="post" action="{{ route('logout') }}">
                                         @csrf
+                                        <button onclick="return confirm('Are you sure you want to logout?')" class="btn btn-link dropdown-item"> Logout </button>
                                     </form>
                                 </div>
                             </li>
