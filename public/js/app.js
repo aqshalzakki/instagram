@@ -1865,6 +1865,10 @@ __webpack_require__.r(__webpack_exports__);
         if (errors.response.status == 401) {
           window.location = '/login';
         }
+
+        if (errors.response.status == 403) {
+          window.location = '/email/verify';
+        }
       });
     }
   },

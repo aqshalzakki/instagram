@@ -12,7 +12,13 @@
                         <div class="alert alert-success" role="alert">
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
-                    @endif
+                        
+                        @elseif(session('message'))
+                            <div class="alert alert-success" role="alert">
+                                Your account has been created! please verify your email.
+                            </div>
+                        
+                        @endif
 
                     {{ __('Before proceeding, please check your email for a verification link.') }}
                     {{ __('If you did not receive the email') }},

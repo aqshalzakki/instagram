@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Support\Facades\Auth;
 
 class VerificationController extends Controller
 {
@@ -25,8 +26,13 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
+    protected $redirectTo = '';
+    
+    public function redirectTo()
+    {
+        \session()->flash('message', 'Congratulations! your account has been verified!');
+        return "/profile/" . Auth::user()->username;
+    }
     /**
      * Create a new controller instance.
      *

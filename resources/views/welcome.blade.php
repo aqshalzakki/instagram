@@ -8,7 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- Styles -->
         <style>
             html, body {
@@ -70,7 +70,6 @@
                     @auth
                         <a href="{{ route('profile.show', ['user' => auth()->user()->username]) }}">profile</a>
                         <a href="{{ route('post.index') }}">feeds</a>
-                        <a onclick="return confirm('Are you sure you want to logout?')" href="{{ route('logout') }}">logout</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

@@ -11,7 +11,7 @@
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Welcome View 
 
@@ -25,14 +25,14 @@ Auth::routes();
 
         Route::get('{user}/edit/', 'ProfilesController@edit')
                ->name('profile.edit')
-               ->middleware('auth');
+               ->middleware('verified');
                 
         Route::get('{user}', 'ProfilesController@show')
                ->name('profile.show');
         
         Route::patch('{user}', 'ProfilesController@update')
                ->name('profile.update')
-               ->middleware('auth');
+               ->middleware('verified');
 
     });
 
@@ -44,8 +44,8 @@ Auth::routes();
     Route::get('/feeds', 'PostsController@index')->name('post.index');
     Route::prefix('post')->group(function(){
 
-        Route::get('create', 'PostsController@create')->name('post.create')->middleware('auth');
-        Route::post('', 'PostsController@store')->name('post.store')->middleware('auth');
+        Route::get('create', 'PostsController@create')->name('post.create')->middleware('verified');
+        Route::post('', 'PostsController@store')->name('post.store')->middleware('verified');
         Route::get('{post}', 'PostsController@show')->name('post.show');
     
         Route::delete('{post}', 'PostsController@destroy')->name('post.destroy');
@@ -56,6 +56,6 @@ Auth::routes();
 
 // Vue in Actions 
 
-    Route::post('/follow/{user}', 'FollowsController@store')->middleware('auth');
+    Route::post('/follow/{user}', 'FollowsController@store')->middleware('verified');
 
 // --------------

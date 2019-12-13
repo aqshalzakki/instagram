@@ -26,7 +26,7 @@ class AddImageToProfilesTable extends Migration
     public function down()
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->dropColumn('image');
+            $table->dropIfExists('profiles');
         });
     }
 }

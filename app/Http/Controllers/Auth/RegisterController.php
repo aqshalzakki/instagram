@@ -30,12 +30,12 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/email/verify';
 
     public function redirectTo()
     {
-        session()->flash('message', 'Your account has been created! please login.');
-        return '/login';
+        session()->flash('message', 'Your account has been created! please verify your email.');
+        return '/email/verify';
     }
 
     /**
@@ -76,21 +76,5 @@ class RegisterController extends Controller
             'username'  => $data['username'],
             'password'  => Hash::make($data['password']),
         ]);
-    }
-
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
     }
 }

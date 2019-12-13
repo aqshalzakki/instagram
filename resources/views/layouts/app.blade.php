@@ -60,7 +60,8 @@
                                     <a class="dropdown-item {{ urlActive('feeds') }}" href="{{ route('post.index') }}">Feeds</a>
                                     <form method="post" action="{{ route('logout') }}">
                                         @csrf
-                                        <button onclick="return confirm('Are you sure you want to logout?')" class="btn btn-link dropdown-item"> Logout </button>
+                                        @method('POST')
+                                        <button type="submit" onclick="return confirm('Are you sure you want to logout?')" class="btn btn-link dropdown-item"> Logout </button>
                                     </form>
                                 </div>
                             </li>

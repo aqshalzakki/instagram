@@ -27,8 +27,13 @@
                         console.log(response.data)
                      })
                      .catch(errors => {
+                         
                         if (errors.response.status == 401){
                             window.location = '/login'
+                        }
+
+                        if (errors.response.status == 403){
+                            window.location = '/email/verify'
                         }
                      })
             }
