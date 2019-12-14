@@ -57,10 +57,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item {{ urlActive('profile') }}" href="{{ route('profile.show', Auth::user()->username) }}">Profile</a>
-                                    <a class="dropdown-item {{ urlActive('feeds') }}" href="{{ route('post.index') }}">Feeds</a>
+                                    <a class="dropdown-item {{ urlActive('posts') }}" href="{{ route('post.index') }}">Posts</a>
                                     <form method="post" action="{{ route('logout') }}">
                                         @csrf
-                                        @method('POST')
                                         <button type="submit" onclick="return confirm('Are you sure you want to logout?')" class="btn btn-link dropdown-item"> Logout </button>
                                     </form>
                                 </div>

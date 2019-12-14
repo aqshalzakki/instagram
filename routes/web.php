@@ -40,8 +40,7 @@ Auth::routes(['verify' => true]);
 
 // Post Routes 
 
-    
-    Route::get('/feeds', 'PostsController@index')->name('post.index');
+    Route::get('/posts', 'PostsController@index')->name('post.index')->middleware('auth');
     Route::prefix('post')->group(function(){
 
         Route::get('create', 'PostsController@create')->name('post.create')->middleware('verified');

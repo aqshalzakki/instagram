@@ -69,7 +69,7 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ route('profile.show', ['user' => auth()->user()->username]) }}">profile</a>
-                        <a href="{{ route('post.index') }}">feeds</a>
+                        <a href="{{ route('post.index') }}">posts</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
