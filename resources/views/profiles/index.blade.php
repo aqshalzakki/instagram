@@ -21,7 +21,7 @@
                 <div class="d-flex align-items-center pb-3">
                     <div class="h4 mt-1">{{ $user->username }}</div>
                     
-                    @unless(auth()->user()->username == $currentUrl)
+                    @unless(auth()->user()['username'] == $currentUrl)
                         <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
                     @endunless
                 
